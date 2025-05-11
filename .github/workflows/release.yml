@@ -53,7 +53,7 @@ jobs:
       matrix:
         include:
           - os: ubuntu-20.04
-            release_package: linuxGTK3_bin_arm64
+            release_package: linuxGTK3_bin_x86_64
           - os: macos-13
             release_package: macos13+_bin_universal
           - os: windows-2022
@@ -79,7 +79,7 @@ jobs:
       
       - if: startsWith(matrix.os, 'ubuntu')
         name: Configure CMake Linux
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxBUILD_SHARED=${{env.wxBUILD_SHARED}}
       
       - if: startsWith(matrix.os, 'macOS')
         name: Configure CMake MacOS
